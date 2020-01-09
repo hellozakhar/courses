@@ -19,40 +19,18 @@ public class MergeArrays {
         for (int i = 0; i < array.length; i++) {
             System.out.print(array[i] + " ");
         }
-        System.out.println("");
+        System.out.print('\n');
     }
 
     public static int[] mergeArrays(int[] a1, int[] a2) {
-        if (a1 == null)
-            return a2;
-        if (a2 == null)
-            return a1;
-        
-        int[] temparr = new int[a1.length + a2.length];
+        int lenArr1 = a1.length, lenArr2 = a2.length;
+        int[] tempArr = new int[lenArr1 + lenArr2];
 
-        for (int i = 0, j = 0, k = 0; i < temparr.length ; i++) {
-            if (j < a1.length && k < a2.length)
-            {
-                if(a1[j]<a2[k]) {
-                    temparr[i] = a1[j];
-                    j++;
-                } else {
-                    temparr[i] = a2[k];
-                    k++;
-                }
-            } else {
-                if (j<a1.length) {
-                    temparr[i] = a1[j];
-                    j++;
-                }
+        int i = 0, j = 0;
+        while (i < lenArr1 || j < lenArr2)
+            tempArr[i + j] = (i < lenArr1 && (j == lenArr2 || a1[i] < a2[j])) ? a1[i++] : a2[j++];
 
-                if (k<a2.length) {
-                    temparr[i] = a2[k];
-                    k++;
-                }
-            }
-        }
-        return temparr;
+        return tempArr;
     }
 
     public static void main(String[] args) {
